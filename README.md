@@ -1,6 +1,6 @@
 # Matplotlib draggable plot example
 
-![Draggable plot example](https://raw.github.com/wiki/yuma-m/matplotlib-draggable-plot/example.gif)
+![Draggable plot example](./example.gif)
 
 ## Installation
 
