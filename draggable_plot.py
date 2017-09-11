@@ -35,10 +35,12 @@ class DraggablePlotExample(object):
         xy = sorted(self._points.items())
         x = zip(*xy)[0]
         y = zip(*xy)[1]
-        if self._line is not None:
-            self._line.set_data(x, y)
-        else:
+        # First time
+        if not self._line:
             self._line, = self._axes.plot(x, y, "b", marker="o", markersize=10)
+        # Update
+        else:
+            self._line.set_data(x, y)
         self._figure.canvas.draw()
 
     def _add_point(self, x, y=None):
@@ -51,7 +53,7 @@ class DraggablePlotExample(object):
         if x in self._points:
             self._points.pop(x)
 
-    def _find_point_near(self, event):
+    def _find_neighbor_point(self, event):
         distance_threshold = 3.0
         nearest_point = None
         min_distance = math.sqrt(2 * (100 ** 2))
@@ -71,7 +73,7 @@ class DraggablePlotExample(object):
         """
         # left click
         if event.button == 1 and event.inaxes in [self._axes]:
-            point = self._find_point_near(event)
+            point = self._find_neighbor_point(event)
             if point:
                 self._dragging_point = point
                 self._remove_point(*point)
@@ -80,7 +82,7 @@ class DraggablePlotExample(object):
             self._update_plot()
         # right click
         elif event.button == 3 and event.inaxes in [self._axes]:
-            point = self._find_point_near(event)
+            point = self._find_neighbor_point(event)
             if point:
                 self._remove_point(*point)
                 self._update_plot()
