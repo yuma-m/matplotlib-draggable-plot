@@ -32,13 +32,11 @@ class DraggablePlotExample(object):
     def _update_plot(self):
         if not self._points:
             return
-        xy = sorted(self._points.items())
-        x = zip(*xy)[0]
-        y = zip(*xy)[1]
-        # First time
+        x, y = zip(*sorted(self._points.items()))
+        # Add new plot
         if not self._line:
             self._line, = self._axes.plot(x, y, "b", marker="o", markersize=10)
-        # Update
+        # Update current plot
         else:
             self._line.set_data(x, y)
         self._figure.canvas.draw()
@@ -54,6 +52,11 @@ class DraggablePlotExample(object):
             self._points.pop(x)
 
     def _find_neighbor_point(self, event):
+        u""" Find point around mouse position
+
+        :rtype: ((int, int)|None)
+        :return: (x, y) if there are any point around mouse else None
+        """
         distance_threshold = 3.0
         nearest_point = None
         min_distance = math.sqrt(2 * (100 ** 2))

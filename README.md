@@ -19,10 +19,10 @@ $ python draggable_plot.py
 - Right click to remove point
 
 
-# ドラッグ可能なプロットの例 (Matplotlib)
+# matplotlib でプロット上の点をドラッグする例
 
 ## 使い方
 
-- 左クリックで点を追加
-- 点をドラッグで移動
-- 右クリックで点を削除
+- プロット上を左クリックで点を追加
+- プロット上の点をドラッグで移動
+- プロット上の点を右クリックで削除
