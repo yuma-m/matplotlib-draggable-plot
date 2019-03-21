@@ -31,14 +31,15 @@ class DraggablePlotExample(object):
 
     def _update_plot(self):
         if not self._points:
-            return
-        x, y = zip(*sorted(self._points.items()))
-        # Add new plot
-        if not self._line:
-            self._line, = self._axes.plot(x, y, "b", marker="o", markersize=10)
-        # Update current plot
+            self._line.set_data([], [])
         else:
-            self._line.set_data(x, y)
+            x, y = zip(*sorted(self._points.items()))
+            # Add new plot
+            if not self._line:
+                self._line, = self._axes.plot(x, y, "b", marker="o", markersize=10)
+            # Update current plot
+            else:
+                self._line.set_data(x, y)
         self._figure.canvas.draw()
 
     def _add_point(self, x, y=None):
