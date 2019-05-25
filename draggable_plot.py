@@ -96,7 +96,6 @@ class DraggablePlotExample(object):
         :type event: MouseEvent
         """
         if event.button == 1 and event.inaxes in [self._axes] and self._dragging_point:
-            self._add_point(event)
             self._dragging_point = None
             self._update_plot()
 
