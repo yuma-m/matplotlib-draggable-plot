@@ -80,7 +80,6 @@ class DraggablePlotExample(object):
             point = self._find_neighbor_point(event)
             if point:
                 self._dragging_point = point
-                self._remove_point(*point)
             else:
                 self._add_point(event)
             self._update_plot()
