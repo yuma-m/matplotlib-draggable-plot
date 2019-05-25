@@ -107,6 +107,8 @@ class DraggablePlotExample(object):
         """
         if not self._dragging_point:
             return
+        if event.xdata is None or event.ydata is None:
+            return
         self._remove_point(*self._dragging_point)
         self._dragging_point = self._add_point(event)
         self._update_plot()
