@@ -80,7 +80,6 @@ class DraggablePlotExample(object):
             point = self._find_neighbor_point(event)
             if point:
                 self._dragging_point = point
-                self._remove_point(*point)
             else:
                 self._add_point(event)
             self._update_plot()
@@ -97,7 +96,6 @@ class DraggablePlotExample(object):
         :type event: MouseEvent
         """
         if event.button == 1 and event.inaxes in [self._axes] and self._dragging_point:
-            self._add_point(event)
             self._dragging_point = None
             self._update_plot()
 
@@ -107,6 +105,8 @@ class DraggablePlotExample(object):
         :type event: MouseEvent
         """
         if not self._dragging_point:
+            return
+        if event.xdata is None or event.ydata is None:
             return
         self._remove_point(*self._dragging_point)
         self._dragging_point = self._add_point(event)
